@@ -73,6 +73,12 @@ SET s=%s:X=x%
 SET s=%s:Y=y%
 SET s=%s:Z=z%
 
+REM avoiding to short input (MAC Adress has at least 12 characters)
+if "%s:~11,1%"=="" goto :e2
+
+REM avoiding to short input (MAC Adress has at least 12 characters)
+if not "%s:~12,1%"=="" goto :e3
+
 ECHO.
 ECHO MAC Address in CISCO Notation:
 ECHO.
@@ -99,6 +105,17 @@ if %choose:%==2 goto exit
 :e2
 ECHO.
 ECHO Not enough characters
+ECHO 1. Restart
+ECHO 2. Exit.
+ECHO.
+set /p "choose:=>> "
+if %choose:%==1 goto start
+if %choose:%=="" goto start
+if %choose:%==2 goto exit
+
+:e3
+ECHO.
+ECHO Too much characters
 ECHO 1. Restart
 ECHO 2. Exit.
 ECHO.
