@@ -17,9 +17,6 @@ SET  /p "s=Paste or type here your MAC-Address and press 'Enter': "
 REM for loop to avoid any unconvential character
 for /f "delims=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-:. " %%G in ("%s%") do if not "%%~G"=="" goto :e1
 
-REM avoiding to short input (MAC Adress has at least 12 characters)
-if "%s:~11,1%"=="" goto :e2
-
 SET s=%s:.=%
 SET s=%s::=%
 SET s=%s:-=%
@@ -73,10 +70,10 @@ SET s=%s:X=x%
 SET s=%s:Y=y%
 SET s=%s:Z=z%
 
-REM avoiding to short input (MAC Adress has at least 12 characters)
+REM avoiding too short input (MAC Adress has at least 12 characters)
 if "%s:~11,1%"=="" goto :e2
 
-REM avoiding to short input (MAC Adress has at least 12 characters)
+REM avoiding too short input (MAC Adress has at least 12 characters)
 if not "%s:~12,1%"=="" goto :e3
 
 ECHO.
